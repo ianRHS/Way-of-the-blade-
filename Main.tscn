@@ -5,6 +5,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(1152, 18)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05dxr"]
+size = Vector2(10, 648)
+
 [node name="Main" type="Node2D" unique_id=2001256775]
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1427900738]
@@ -24,3 +27,27 @@ position = Vector2(293, 590)
 [node name="Player 2" parent="." unique_id=1135110097 instance=ExtResource("1_glv2v")]
 position = Vector2(937, 590)
 player_prefix = "p2"
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=594525251]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1704345521]
+position = Vector2(-5, 324)
+shape = SubResource("RectangleShape2D_05dxr")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=268739821]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=265690497]
+position = Vector2(1157, 324)
+shape = SubResource("RectangleShape2D_05dxr")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1786918077]
+
+[node name="StatusLabel" type="Label" parent="HUD" unique_id=168185239]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -66.0
+offset_right = 66.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "READY . . . FIGHT!"
