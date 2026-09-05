@@ -4,12 +4,13 @@
 size = Vector2(26, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05dxr"]
-size = Vector2(26, 31)
+size = Vector2(26, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekq1h"]
 size = Vector2(41, 24)
 
 [node name="Player" type="CharacterBody2D" unique_id=217431882]
+visibility_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=590253631]
 
@@ -18,14 +19,18 @@ position = Vector2(3, 15)
 shape = SubResource("RectangleShape2D_xnrmw")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=952083434]
+light_mask = 0
+visibility_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=131704623]
-position = Vector2(3, 24.5)
+position = Vector2(3, 22)
 shape = SubResource("RectangleShape2D_05dxr")
 
 [node name="Pivot" type="Node2D" parent="." unique_id=1922331350]
 
 [node name="Hitbox" type="Area2D" parent="Pivot" unique_id=691388960]
+light_mask = 4
+visibility_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hitbox" unique_id=1694097430]
 position = Vector2(36.5, 14)
