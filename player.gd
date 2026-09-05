@@ -9,7 +9,7 @@ const JUMP_VELOCITY = -400.0
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking: bool = false
 
-@onready var hitbox_shape: CollisionShape2D = $Pivot/Hitbox/HitboxShape
+@onready var hitbox_shape: CollisionShape2D = $Pivot/Hitbox/CollisionShape2D
 
 
 func _physics_process(delta: float) -> void:

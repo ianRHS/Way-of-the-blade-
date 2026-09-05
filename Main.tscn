@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ddn8l01e1jr76"]
+
+[ext_resource type="PackedScene" uid="uid://dpgcpbiix8p14" path="res://player.tscn" id="1_glv2v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
+size = Vector2(1152, 18)
+
+[node name="Main" type="Node2D" unique_id=2001256775]
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1427900738]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=523584079]
+position = Vector2(576, 639)
+shape = SubResource("RectangleShape2D_xnrmw")
+
+[node name="ColorRect" type="ColorRect" parent="Floor" unique_id=565232438]
+offset_top = 630.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Player 1" parent="." unique_id=217431882 instance=ExtResource("1_glv2v")]
+position = Vector2(293, 590)
+
+[node name="Player 2" parent="." unique_id=1135110097 instance=ExtResource("1_glv2v")]
+position = Vector2(937, 590)
+player_prefix = "p2"
