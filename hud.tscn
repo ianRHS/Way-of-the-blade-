@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://binsmm51c3858"]
+
+[ext_resource type="Script" uid="uid://cqevxeisov3rc" path="res://hud.gd" id="1_37p78"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1926756454]
+script = ExtResource("1_37p78")
+
+[node name="Label" type="Label" parent="." unique_id=1290676185]
+anchors_preset = -1
+anchor_left = 0.462
+anchor_top = 0.123
+anchor_right = 0.54200006
+anchor_bottom = 0.165
+offset_left = -0.22399902
+offset_top = 4.2959976
+offset_right = 2.6159668
+offset_bottom = 0.0799942
+grow_horizontal = 2
+text = "P1: 0 | P2: 0"

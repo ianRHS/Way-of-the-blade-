@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ddn8l01e1jr76"]
 
 [ext_resource type="PackedScene" uid="uid://dpgcpbiix8p14" path="res://player.tscn" id="1_glv2v"]
+[ext_resource type="PackedScene" uid="uid://binsmm51c3858" path="res://hud.tscn" id="2_uu6xs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(1152, 18)
@@ -51,3 +52,5 @@ offset_right = 66.0
 offset_bottom = 23.0
 grow_horizontal = 2
 text = "READY . . . FIGHT!"
+
+[node name="HUD2" parent="." unique_id=1926756454 instance=ExtResource("2_uu6xs")]
