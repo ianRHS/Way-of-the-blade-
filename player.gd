@@ -11,9 +11,10 @@ var is_guarding: bool = false
 var is_staggered: bool = false
 var is_dead: bool = false
 var is_dashing: bool = false
-var last_left_press_time: float = -1.0
-var last_right_press_time: float = -1.0
-const DOUBLE_TAP_WINDOW: float = 0.25
+var can_dash_left: bool = false
+var can_dash_right: bool = false
+
+
 
 # Ensure node paths match your Scene dock exactly (Case Sensitive)
 @onready var HitBox_Shape: CollisionShape2D = $Pivot/Hitbox/HitBoxShape
@@ -35,28 +36,39 @@ func _physics_process(delta: float) -> void:
 	
 	#Block Inputs while staggered, attacking, or guarding
 	if not is_staggered:
-		var current_time = Time.get_ticks_msec() / 1000.0
 		# Handle Attack Input
-		if Input.is_action_just_pressed(player_prefix + "_attack") and not is_attacking and not is_guarding and not is_dashing:
+		if Input.is_action_just_pressed(player_prefix + "_attack") \
+		 and not is_attacking and not is_guarding and not is_dashing:
 			attack()
 			
 		# Handle Guard / Parry Input
-		if Input.is_action_just_pressed(player_prefix + "_guard") and not is_attacking and not is_guarding and not is_dashing:
+		if Input.is_action_just_pressed(player_prefix + "_guard") \
+		 and not is_attacking and not is_guarding and not is_dashing:
 			guard()
 			
 		# Double tap left to Dash left
-		if Input.is_action_just_pressed(player_prefix + "_left") and not is_attacking and not is_guarding and not is_dashing:
-			if current_time - last_left_press_time <= DOUBLE_TAP_WINDOW:
+		if Input.is_action_just_pressed(player_prefix + "_left") \
+		 and not is_attacking and not is_guarding and not is_dashing:
+			if can_dash_left:
 				dash(-1.0)
-		else:
-			last_left_press_time = current_time
+				can_dash_left = false
+			else:
+				can_dash_left = true
+				await get_tree().create_timer(0.25).timeout
+				can_dash_left = false
+		
 		
 		# Double Tap right to Dash Right
-		if Input.is_action_just_pressed(player_prefix + "_right") and not is_attacking and not is_guarding and not is_dashing:
-			if current_time - last_right_press_time <= DOUBLE_TAP_WINDOW:
+		if Input.is_action_just_pressed(player_prefix + "_right") \
+		 and not is_attacking and not is_guarding and not is_dashing:
+			if can_dash_right:
 				dash(1.0)
-		else:
-			last_right_press_time = current_time
+				can_dash_right = false
+				
+			else:
+				can_dash_right = true
+				await get_tree().create_timer(0.25).timeout
+				can_dash_right = false
 
 
 
