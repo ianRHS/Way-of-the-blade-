@@ -53,4 +53,4 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "READY . . . FIGHT!"
 
-[node name="HUD2" parent="." unique_id=1926756454 instance=ExtResource("2_uu6xs")]
+[node name="Score tracker" parent="." unique_id=1926756454 instance=ExtResource("2_uu6xs")]

@@ -7,6 +7,7 @@ const JUMP_VELOCITY = -400.0
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking: bool = false
+var is_guarding: bool = false
 var is_dead: bool = false
 
 # Ensure node paths match your Scene dock exactly (Case Sensitive)
@@ -27,11 +28,15 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 		
 	# Handle Attack Input
-	if Input.is_action_just_pressed(player_prefix + "_attack") and not is_attacking:
+	if Input.is_action_just_pressed(player_prefix + "_attack") and not is_attacking and not is_guarding:
 		attack()
+		
+	# Handle Guard / Parry Input
+	if Input.is_action_just_pressed(player_prefix + "_guard") and not is_attacking and not is_guarding:
+		guard()
 	
 	# Handle Movement
-	if not is_attacking:
+	if not is_attacking and not is_guarding:
 		if Input.is_action_just_pressed(player_prefix + "_jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 		
@@ -61,6 +66,15 @@ func attack() -> void:
 	HitBox_Shape.set_deferred("disabled", true)
 	sword_visual.visible = false
 	is_attacking = false
+	
+func guard() -> void:
+	is_guarding = true
+	modulate = Color.CYAN # Visual feedback: Player turns cyan while parrying
+	# 0.2s parry window
+	await get_tree().create_timer(0.2).timeout
+	
+	modulate = Color.WHITE # Reset visual feedback
+	is_guarding = false
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	print(">>> SOMETHING ENTERED THE HURTBOX: ", area.name)
@@ -68,7 +82,11 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.name.to_lower() == "hitbox":
 		var attacker = area.get_parent().get_parent()
 		if attacker != self and not is_dead:
-			take_damage()
+			if is_guarding:
+				print(player_prefix.to_upper() + " PARRIED THE ATTACK!")
+			else:
+				take_damage()
+			
 		
 func take_damage() -> void:
 	is_dead = true
