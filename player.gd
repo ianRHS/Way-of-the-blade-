@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -400.0
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking: bool = false
 var is_guarding: bool = false
+var is_staggered: bool = false
 var is_dead: bool = false
 
 # Ensure node paths match your Scene dock exactly (Case Sensitive)
@@ -27,32 +28,38 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-	# Handle Attack Input
-	if Input.is_action_just_pressed(player_prefix + "_attack") and not is_attacking and not is_guarding:
-		attack()
-		
-	# Handle Guard / Parry Input
-	if Input.is_action_just_pressed(player_prefix + "_guard") and not is_attacking and not is_guarding:
-		guard()
 	
+	#Block Inputs while staggered, attacking, or guarding
+	if not is_staggered:
+		# Handle Attack Input
+		if Input.is_action_just_pressed(player_prefix + "_attack") and not is_attacking and not is_guarding:
+			attack()
+			
+		# Handle Guard / Parry Input
+		if Input.is_action_just_pressed(player_prefix + "_guard") and not is_attacking and not is_guarding:
+			guard()
+
+
 	# Handle Movement
-	if not is_attacking and not is_guarding:
+	if is_staggered:
+		# Let knockback decay smoothly over frames
+		velocity.x = move_toward(velocity.x, 0, 800.0 * delta)
+	elif not is_attacking and not is_guarding:
 		if Input.is_action_just_pressed(player_prefix + "_jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
-		
+			
 		var direction := Input.get_axis(player_prefix + "_left", player_prefix + "_right")
 		if direction != 0:
 			velocity.x = direction * SPEED
 			$Pivot.scale.x = direction
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.x = move_toward(velocity.x, 0, SPEED * 10.0 * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
+		velocity.x = move_toward(velocity.x, 0, SPEED * 10.0 * delta)
 		
-	# Single move_and_slide call at the end of physics processing
 	move_and_slide()
-	
+		
+
 func attack() -> void:
 	is_attacking = true
 	
@@ -62,31 +69,58 @@ func attack() -> void:
 	
 	# Swing duration
 	await get_tree().create_timer(0.2).timeout
-	
-	HitBox_Shape.set_deferred("disabled", true)
-	sword_visual.visible = false
-	is_attacking = false
-	
+	if not is_staggered:
+		HitBox_Shape.set_deferred("disabled", true)
+		sword_visual.visible = false
+		is_attacking = false
+		
 func guard() -> void:
 	is_guarding = true
-	modulate = Color.CYAN # Visual feedback: Player turns cyan while parrying
-	# 0.2s parry window
+	modulate = Color.CYAN # Visual feedback : Parrying
+	
 	await get_tree().create_timer(0.2).timeout
 	
-	modulate = Color.WHITE # Reset visual feedback
+	if not is_staggered:
+		modulate = Color.WHITE
+		is_guarding = false
+		
+func get_staggered() -> void:
+	# Immediately interrupt active states
+	is_attacking = false
 	is_guarding = false
+	is_staggered = true
+	
+	# Force disable active hitbox/visuals
+	HitBox_Shape.set_deferred("disabled", true)
+	sword_visual.visible = false
+	
+	# Flash yellow to indicate recoil/stun
+	modulate = Color.YELLOW
+	
+	# Knockback recoil ( Push backward based on facing direction)
+	velocity.x = - $Pivot.scale.x * 350.0
+	
+	# 0.5s stagger lockout window
+	await get_tree().create_timer(0.5).timeout
+	
+	modulate = Color.WHITE
+	is_staggered = false
+
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	print(">>> SOMETHING ENTERED THE HURTBOX: ", area.name)
-	
-	if area.name.to_lower() == "hitbox":
+	if area.name.to_lower() ==  "hitbox":
 		var attacker = area.get_parent().get_parent()
+		
 		if attacker != self and not is_dead:
 			if is_guarding:
 				print(player_prefix.to_upper() + " PARRIED THE ATTACK!")
+				# Stagger the opponent who attempted the strike
+				if attacker.has_method("get_staggered"):
+					attacker.get_staggered()
 			else:
 				take_damage()
-			
+		
+		
 		
 func take_damage() -> void:
 	is_dead = true
