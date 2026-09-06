@@ -18,3 +18,9 @@ func reset_match() -> void:
 	p1_score = 0
 	p2_score = 0
 	
+func trigger_hitstop(duration: float = 0.15, scale: float = 0.05) -> void:
+	Engine.time_scale = scale
+	# Must use process_always or scale down the timer duration
+	await get_tree().create_timer(duration * scale, true, false, true).timeout
+	Engine.time_scale = 1.0
+	

@@ -114,6 +114,10 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		if attacker != self and not is_dead:
 			if is_guarding:
 				print(player_prefix.to_upper() + " PARRIED THE ATTACK!")
+				
+				# Sharp freeze frame on clash
+				Global.trigger_hitstop(0.1, 0.05)
+				
 				# Stagger the opponent who attempted the strike
 				if attacker.has_method("get_staggered"):
 					attacker.get_staggered()
@@ -125,6 +129,8 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 func take_damage() -> void:
 	is_dead = true
 	set_physics_process(false)
+	# Freeze frames briefly for fatal hit weight
+	Global.trigger_hitstop(0.18, 0.02)
 	
 	# Give ppoint to the opponent
 	Global.record_defeat(player_prefix)
