@@ -20,25 +20,18 @@ script = ExtResource("1_4flbx")
 shape = SubResource("RectangleShape2D_xnrmw")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=952083434]
-collision_layer = 2
-collision_mask = 0
+collision_mask = 2
 
-[node name="HurtboxShape" type="CollisionShape2D" parent="Hurtbox" unique_id=131704623]
+[node name="HurtBoxShape" type="CollisionShape2D" parent="Hurtbox" unique_id=131704623]
 shape = SubResource("RectangleShape2D_05dxr")
 
 [node name="Pivot" type="Node2D" parent="." unique_id=1922331350]
 
-[node name="Player Outline" type="ColorRect" parent="Pivot" unique_id=469966305]
-offset_left = -13.0
-offset_top = -25.0
-offset_right = 13.0
-offset_bottom = 25.0
-
 [node name="Hitbox" type="Area2D" parent="Pivot" unique_id=691388960]
-collision_layer = 0
-collision_mask = 2
+collision_layer = 2
 
 [node name="HitBoxShape" type="CollisionShape2D" parent="Pivot/Hitbox" unique_id=1694097430]
+visible = false
 position = Vector2(33.75, 0)
 shape = SubResource("RectangleShape2D_ekq1h")
 disabled = true
@@ -50,5 +43,11 @@ offset_top = -12.0
 offset_right = 55.0
 offset_bottom = 12.0
 color = Color(0.9068175, 0.61688155, 0.2302593, 1)
+
+[node name="Player Outline" type="ColorRect" parent="Pivot" unique_id=469966305]
+offset_left = -13.0
+offset_top = -25.0
+offset_right = 13.0
+offset_bottom = 25.0
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
