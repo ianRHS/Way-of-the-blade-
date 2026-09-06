@@ -10,6 +10,10 @@ var is_attacking: bool = false
 var is_guarding: bool = false
 var is_staggered: bool = false
 var is_dead: bool = false
+var is_dashing: bool = false
+var last_left_press_time: float = -1.0
+var last_right_press_time: float = -1.0
+const DOUBLE_TAP_WINDOW: float = 0.25
 
 # Ensure node paths match your Scene dock exactly (Case Sensitive)
 @onready var HitBox_Shape: CollisionShape2D = $Pivot/Hitbox/HitBoxShape
@@ -31,19 +35,38 @@ func _physics_process(delta: float) -> void:
 	
 	#Block Inputs while staggered, attacking, or guarding
 	if not is_staggered:
+		var current_time = Time.get_ticks_msec() / 1000.0
 		# Handle Attack Input
-		if Input.is_action_just_pressed(player_prefix + "_attack") and not is_attacking and not is_guarding:
+		if Input.is_action_just_pressed(player_prefix + "_attack") and not is_attacking and not is_guarding and not is_dashing:
 			attack()
 			
 		# Handle Guard / Parry Input
-		if Input.is_action_just_pressed(player_prefix + "_guard") and not is_attacking and not is_guarding:
+		if Input.is_action_just_pressed(player_prefix + "_guard") and not is_attacking and not is_guarding and not is_dashing:
 			guard()
+			
+		# Double tap left to Dash left
+		if Input.is_action_just_pressed(player_prefix + "_left") and not is_attacking and not is_guarding and not is_dashing:
+			if current_time - last_left_press_time <= DOUBLE_TAP_WINDOW:
+				dash(-1.0)
+		else:
+			last_left_press_time = current_time
+		
+		# Double Tap right to Dash Right
+		if Input.is_action_just_pressed(player_prefix + "_right") and not is_attacking and not is_guarding and not is_dashing:
+			if current_time - last_right_press_time <= DOUBLE_TAP_WINDOW:
+				dash(1.0)
+		else:
+			last_right_press_time = current_time
+
+
 
 
 	# Handle Movement
 	if is_staggered:
 		# Let knockback decay smoothly over frames
 		velocity.x = move_toward(velocity.x, 0, 800.0 * delta)
+	elif is_dashing:
+		velocity.x = move_toward(velocity.x, 0, 2000.0 * delta)
 	elif not is_attacking and not is_guarding:
 		if Input.is_action_just_pressed(player_prefix + "_jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
@@ -59,6 +82,21 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 		
+
+func dash(forced_dir: float = 0.0) -> void:
+	is_dashing = true
+	var dash_dir = forced_dir
+	if dash_dir == 0.0:
+		var direction := Input.get_axis(player_prefix + "_left", player_prefix + "_right")
+		dash_dir = direction if direction != 0 else $Pivot.scale.x
+	velocity.x = dash_dir * 900.0
+	if dash_dir != 0:
+		$Pivot.scale.x = sign(dash_dir)
+		
+	await get_tree().create_timer(0.2).timeout
+	if not is_staggered:
+		is_dashing = false
+
 
 func attack() -> void:
 	is_attacking = true
@@ -88,6 +126,7 @@ func get_staggered() -> void:
 	# Immediately interrupt active states
 	is_attacking = false
 	is_guarding = false
+	is_dashing = false
 	is_staggered = true
 	
 	# Force disable active hitbox/visuals
