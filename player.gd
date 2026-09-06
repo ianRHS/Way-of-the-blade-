@@ -132,7 +132,7 @@ func take_damage() -> void:
 	# Freeze frames briefly for fatal hit weight
 	Global.trigger_hitstop(0.18, 0.02)
 	
-	# Give ppoint to the opponent
+	# Give point to the opponent
 	Global.record_defeat(player_prefix)
 	
 	print("P1: ", Global.p1_score, " | P2: ", Global.p2_score)
