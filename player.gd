@@ -185,15 +185,16 @@ func take_damage() -> void:
 	
 	# Give point to the opponent
 	Global.record_defeat(player_prefix)
-	
 	print("P1: ", Global.p1_score, " | P2: ", Global.p2_score)
 	
 	await get_tree().create_timer(0.8).timeout
 	
 	if Global.is_match_over():
-		print("MATCH OVER! Resetting match. . .")
-		Global.reset_match()
-		
-	get_tree().reload_current_scene()
+		print("MATCH OVER!")
+		var winner = "PLAYER 2" if player_prefix == "p1" else "PLAYER 1"
+		Global.show_victory_screen(winner)
+	else:
+		get_tree().reload_current_scene()
+	
 	
 	
