@@ -73,8 +73,18 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 func take_damage() -> void:
 	is_dead = true
 	set_physics_process(false)
-	print(player_prefix + " Defeated!")
 	
-	# Brief pause before reloading arena for next round
+	# Give ppoint to the opponent
+	Global.record_defeat(player_prefix)
+	
+	print("P1: ", Global.p1_score, " | P2: ", Global.p2_score)
+	
 	await get_tree().create_timer(0.8).timeout
+	
+	if Global.is_match_over():
+		print("MATCH OVER! Resetting match. . .")
+		Global.reset_match()
+		
 	get_tree().reload_current_scene()
+	
+	
