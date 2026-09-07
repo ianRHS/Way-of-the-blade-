@@ -163,8 +163,14 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		var attacker = area.get_parent().get_parent()
 		
 		if attacker != self and not is_dead:
+			var impact_pos = (global_position + area.global_position) / 2.0
+			
 			if is_guarding:
 				print(player_prefix.to_upper() + " PARRIED THE ATTACK!")
+				
+				# Spawn yellow parry sparks
+				Global.spawn_impact_particles(impact_pos, true)
+				
 				
 				# Sharp freeze frame on clash
 				Global.trigger_hitstop(0.1, 0.05)
@@ -173,6 +179,9 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 				if attacker.has_method("get_staggered"):
 					attacker.get_staggered()
 			else:
+				# Spawn red hit particles
+				Global.spawn_impact_particles(impact_pos, false)
+				
 				take_damage()
 		
 		
