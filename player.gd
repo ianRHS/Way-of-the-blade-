@@ -113,17 +113,30 @@ func dash(forced_dir: float = 0.0) -> void:
 func attack() -> void:
 	is_attacking = true
 	
-	# set_deferred ensures physics engine processes the shape toggle safely
+	# 1. Active Swing phase
+	
 	HitBox_Shape.set_deferred("disabled", false)
 	sword_visual.visible = true
-	
-	# Swing duration
 	await get_tree().create_timer(0.2).timeout
+	
+	
+	# 2. Disable Hitbox ( Sword swing finishes)
+	HitBox_Shape.set_deferred("disabled", true)
+	sword_visual.visible = false
+	
+	# Recovery phase ( Player is locked in place briefly after missing)
 	if not is_staggered:
-		HitBox_Shape.set_deferred("disabled", true)
-		sword_visual.visible = false
+		modulate = Color(0.5, 0.5, 0.5) # Dims character gray during recovery
+		await get_tree().create_timer(0.25).timeout
+		
+	# 4 Return to neutral
+	if not is_staggered:
+		modulate = Color.WHITE
 		is_attacking = false
 		
+		
+		
+
 func guard() -> void:
 	is_guarding = true
 	modulate = Color.CYAN # Visual feedback : Parrying
