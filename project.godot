@@ -13,7 +13,6 @@ config_version=5
 config/name="Samurai 1v1 fighting game"
 run/main_scene="uid://ddn8l01e1jr76"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
 
 [autoload]
 
