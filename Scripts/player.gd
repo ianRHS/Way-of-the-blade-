@@ -137,22 +137,38 @@ func attack() -> void:
 	var attack_num = randi_range(1, 3)
 	anim.play("attack_" + str(attack_num))
 	
+	# Set target strike frame based on variation (attack 2 hits on frame 4, others on frame 2)
+	var hit_frame: int = 4 if attack_num == 2 else 2
+	
+	
+	# Wait until the blade actually swings forward (e.g., frame 1)
+	while anim.frame < 2 and anim.is_playing():
+		await anim.frame_changed
+	
+	
 	# 1. Active Swing phase
 	
 	HitBox_Shape.set_deferred("disabled", false)
 	sword_visual.visible = true
-	await get_tree().create_timer(0.2).timeout
+	
+	# Keep hitbox active for 1 frame window
+	await anim.frame_changed
 	
 	
 	# 2. Disable Hitbox ( Sword swing finishes)
 	HitBox_Shape.set_deferred("disabled", true)
 	sword_visual.visible = false
 	
+	# Recovery phase - Wait for the rest of the animation to complete
+	if anim.is_playing():
+		await anim.animation_finished
+	
 	# Recovery phase ( Player is locked in place briefly after missing)
 	if not is_staggered:
 		modulate = Color(0.5, 0.5, 0.5) # Dims character gray during recovery
-		await get_tree().create_timer(0.25).timeout
 		
+
+
 	# 4 Return to neutral
 	if not is_staggered:
 		modulate = Color.WHITE

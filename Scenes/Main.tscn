@@ -40,7 +40,7 @@ shape = SubResource("RectangleShape2D_05dxr")
 [node name="RightWall" type="StaticBody2D" parent="." unique_id=268739821]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=265690497]
-position = Vector2(1157, 324)
+position = Vector2(1158, 324)
 shape = SubResource("RectangleShape2D_05dxr")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1786918077]

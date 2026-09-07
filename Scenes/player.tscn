@@ -281,7 +281,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"attack_2",
-"speed": 20.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -354,11 +354,9 @@ shape = SubResource("RectangleShape2D_05dxr")
 [node name="Pivot" type="Node2D" parent="." unique_id=1922331350]
 
 [node name="Hitbox" type="Area2D" parent="Pivot" unique_id=691388960]
-visible = false
 collision_layer = 2
 
 [node name="HitBoxShape" type="CollisionShape2D" parent="Pivot/Hitbox" unique_id=1694097430]
-visible = false
 position = Vector2(31, -2)
 shape = SubResource("RectangleShape2D_ekq1h")
 disabled = true
@@ -380,10 +378,8 @@ offset_bottom = 25.0
 [node name="CharacterAnim" type="AnimatedSprite2D" parent="Pivot" unique_id=856848261]
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_05dxr")
-animation = &"death"
+animation = &"attack_2"
 autoplay = "Idle"
-frame = 5
-frame_progress = 1.0
 offset = Vector2(0, -33)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
