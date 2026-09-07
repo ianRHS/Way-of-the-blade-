@@ -143,9 +143,19 @@ func guard() -> void:
 	
 	await get_tree().create_timer(0.2).timeout
 	
+	if not is_staggered and is_guarding:
+		is_guarding = false
+		modulate = Color(0.3, 0.3, 0.8) # Dark blue during missed guard recovery
+		
+		# Lock inputs briefly after a whiffed parry
+		is_attacking = true # Temporarily reuse Input lock
+		await get_tree().create_timer(0.3).timeout
+		is_attacking = false
+		
+	# Return to Neutral
 	if not is_staggered:
 		modulate = Color.WHITE
-		is_guarding = false
+		
 		
 func get_staggered() -> void:
 	# Immediately interrupt active states
