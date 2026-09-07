@@ -245,6 +245,8 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 				
 				# Spawn yellow parry sparks
 				Global.spawn_impact_particles(impact_pos, true)
+				# Light shake for parry clash
+				Global.shake_camera(5.0)
 				
 				
 				# Sharp freeze frame on clash
@@ -256,6 +258,9 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			else:
 				# Spawn red hit particles
 				Global.spawn_impact_particles(impact_pos, false)
+				# Heavy shake on fatal strike
+				Global.shake_camera(14.0)
+			
 				
 				take_damage()
 		
@@ -274,6 +279,8 @@ func take_damage() -> void:
 	
 	set_physics_process(false)
 	
+	# 1. Trigger dramatic camera zoom centered on this player
+	Global.trigger_fatal_zoom(global_position, 1.4)
 	
 	
 	# Freeze frames briefly for fatal hit weight
@@ -284,6 +291,9 @@ func take_damage() -> void:
 	print("P1: ", Global.p1_score, " | P2: ", Global.p2_score)
 	
 	await get_tree().create_timer(0.8).timeout
+	
+	# 2. Reset zoom before stage reload or victory screen
+	Global.reset_camera_zoom()
 	
 	if Global.is_match_over():
 		print("MATCH OVER!")

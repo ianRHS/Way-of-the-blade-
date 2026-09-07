@@ -3,6 +3,11 @@ extends Node
 var p1_score: int = 0
 var p2_score: int = 0
 const WINS_NEEDED: int = 3
+var camera: Camera2D = null
+
+func shake_camera(amount: float = 8.0) -> void:
+	if camera and is_instance_valid(camera):
+		camera.apply_shake(amount)
 
 func record_defeat(defeated_player: String) -> void:
 	if defeated_player == "p1":
@@ -14,6 +19,18 @@ func record_defeat(defeated_player: String) -> void:
 func is_match_over() -> bool:
 	return p1_score >= WINS_NEEDED or p2_score >= WINS_NEEDED
 	
+func trigger_fatal_zoom(focus_pos: Vector2, zoom_factor: float = 1.4) -> void:
+	if camera and is_instance_valid(camera):
+		camera.trigger_fatal_zoom(focus_pos, zoom_factor)
+		
+func reset_camera_zoom() -> void:
+	if camera and is_instance_valid(camera):
+		camera.reset_zoom()
+
+
+
+
+
 # === Dynamic Particle System === 
 # This generates and destroys particles in code, no setup required in the editor.
 

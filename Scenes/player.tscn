@@ -357,11 +357,13 @@ shape = SubResource("RectangleShape2D_05dxr")
 collision_layer = 2
 
 [node name="HitBoxShape" type="CollisionShape2D" parent="Pivot/Hitbox" unique_id=1694097430]
+visible = false
 position = Vector2(31, -2)
 shape = SubResource("RectangleShape2D_ekq1h")
 disabled = true
 
 [node name="SwordVisual" type="ColorRect" parent="Pivot/Hitbox" unique_id=1553501942]
+visible = false
 offset_left = 13.0
 offset_top = -14.0
 offset_right = 49.0
