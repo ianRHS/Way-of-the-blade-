@@ -281,7 +281,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"attack_2",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -380,6 +380,8 @@ scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_05dxr")
 animation = &"attack_2"
 autoplay = "Idle"
+frame = 4
+frame_progress = 1.0
 offset = Vector2(0, -33)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

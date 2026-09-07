@@ -159,13 +159,16 @@ func attack() -> void:
 	HitBox_Shape.set_deferred("disabled", true)
 	sword_visual.visible = false
 	
-	# Recovery phase - Wait for the rest of the animation to complete
-	if anim.is_playing():
-		await anim.animation_finished
-	
 	# Recovery phase ( Player is locked in place briefly after missing)
 	if not is_staggered:
 		modulate = Color(0.5, 0.5, 0.5) # Dims character gray during recovery
+		
+		# Wait for the rest of the animation to finish
+		if anim.is_playing():
+			await anim.animation_finished
+			
+			# Extra recovery lockout delay
+			await get_tree().create_timer(0.2).timeout
 		
 
 
