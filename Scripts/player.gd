@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -400.0
 @export var player_prefix: String = "p1"
 @export var opponent: CharacterBody2D
 
+
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking: bool = false
 var is_guarding: bool = false
@@ -20,6 +21,7 @@ var can_dash_right: bool = false
 # Ensure node paths match your Scene dock exactly (Case Sensitive)
 @onready var HitBox_Shape: CollisionShape2D = $Pivot/Hitbox/HitBoxShape
 @onready var sword_visual: ColorRect = $Pivot/Hitbox/SwordVisual
+@onready var anim: AnimatedSprite2D = $Pivot/CharacterAnim
 
 func _ready() -> void:
 	# Ensure hitbox and visual start disabled
@@ -102,6 +104,14 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED * 10.0 * delta)
 		
 	move_and_slide()
+	
+	# Update ground movement visuals when not performing an action
+	if not is_attacking and not is_guarding and not is_staggered:
+		if abs(velocity.x) > 10.0:
+			anim.play("Walk")
+		else:
+			anim.play("Idle")
+			
 		
 
 func dash(forced_dir: float = 0.0) -> void:
@@ -121,6 +131,11 @@ func dash(forced_dir: float = 0.0) -> void:
 
 func attack() -> void:
 	is_attacking = true
+	velocity.x = 0
+	
+	# Play a random attack animation
+	var attack_num = randi_range(1, 3)
+	anim.play("attack_" + str(attack_num))
 	
 	# 1. Active Swing phase
 	
@@ -142,6 +157,7 @@ func attack() -> void:
 	if not is_staggered:
 		modulate = Color.WHITE
 		is_attacking = false
+		anim.play("Idle")
 		
 		
 		
@@ -149,12 +165,16 @@ func attack() -> void:
 func guard() -> void:
 	is_guarding = true
 	modulate = Color.CYAN # Visual feedback : Parrying
-	
+	velocity.x = 0
+	anim.play("guard")
 	await get_tree().create_timer(0.2).timeout
+	
+	
 	
 	if not is_staggered and is_guarding:
 		is_guarding = false
 		modulate = Color(0.3, 0.3, 0.8) # Dark blue during missed guard recovery
+		anim.play("Idle")
 		
 		# Lock inputs briefly after a whiffed parry
 		is_attacking = true # Temporarily reuse Input lock
@@ -180,6 +200,9 @@ func get_staggered() -> void:
 	# Flash yellow to indicate recoil/stun
 	modulate = Color.YELLOW
 	
+	# Add This: Trigger stagger Animation
+	anim.play("Stagger")
+	
 	# Knockback recoil ( Push backward based on facing direction)
 	velocity.x = - $Pivot.scale.x * 350.0
 	
@@ -188,6 +211,7 @@ func get_staggered() -> void:
 	
 	modulate = Color.WHITE
 	is_staggered = false
+	anim.play("Idle")
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
@@ -220,7 +244,19 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		
 func take_damage() -> void:
 	is_dead = true
+	
+	# Disable hitboxes and body collisions so dead body can't collide
+	HitBox_Shape.set_deferred("disabled", true)
+	sword_visual.visible = false
+	$CollisionShape2D.set_deferred("disabled", true)
+	
+	# Trigger the death animation
+	anim.play("death")
+	
 	set_physics_process(false)
+	
+	
+	
 	# Freeze frames briefly for fatal hit weight
 	Global.trigger_hitstop(0.18, 0.02)
 	
