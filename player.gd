@@ -4,6 +4,7 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
 
 @export var player_prefix: String = "p1"
+@export var opponent: CharacterBody2D
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking: bool = false
@@ -91,6 +92,14 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED * 10.0 * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 10.0 * delta)
+		
+		# Auto face opponent when moving or idle
+		if opponent and is_instance_valid(opponent):
+			var dir_to_opp = opponent.global_position.x - global_position.x
+			if dir_to_opp != 0:
+				$Pivot.scale.x = sign(dir_to_opp)
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED * 10.0 * delta)
 		
 	move_and_slide()
 		
