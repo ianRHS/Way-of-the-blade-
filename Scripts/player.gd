@@ -5,6 +5,7 @@ const JUMP_VELOCITY = -400.0
 
 @export var player_prefix: String = "p1"
 @export var opponent: CharacterBody2D
+@export var max_health: int = 3
 
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -15,7 +16,7 @@ var is_dead: bool = false
 var is_dashing: bool = false
 var can_dash_left: bool = false
 var can_dash_right: bool = false
-
+var current_health: int
 
 
 # Ensure node paths match your Scene dock exactly (Case Sensitive)
@@ -24,9 +25,12 @@ var can_dash_right: bool = false
 @onready var anim: AnimatedSprite2D = $Pivot/CharacterAnim
 
 func _ready() -> void:
+	current_health = max_health
+	
 	# Ensure hitbox and visual start disabled
 	HitBox_Shape.set_deferred("disabled", true)
 	sword_visual.visible = false
+	Global.update_health(player_prefix, current_health, max_health)
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -267,40 +271,56 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		
 		
 func take_damage() -> void:
-	is_dead = true
+	print("Taking damage! Current health: ", current_health)
+	if is_dead:
+		return
+		
+	current_health -= 1
+	Global.update_health(player_prefix, current_health, max_health)
 	
-	# Disable hitboxes and body collisions so dead body can't collide
-	HitBox_Shape.set_deferred("disabled", true)
-	sword_visual.visible = false
-	$CollisionShape2D.set_deferred("disabled", true)
-	
-	# Trigger the death animation
-	anim.play("death")
-	
-	set_physics_process(false)
-	
-	# 1. Trigger dramatic camera zoom centered on this player
-	Global.trigger_fatal_zoom(global_position, 1.4)
-	
-	
-	# Freeze frames briefly for fatal hit weight
-	Global.trigger_hitstop(0.18, 0.02)
-	
-	# Give point to the opponent
-	Global.record_defeat(player_prefix)
-	print("P1: ", Global.p1_score, " | P2: ", Global.p2_score)
-	
-	await get_tree().create_timer(0.8).timeout
-	
-	# 2. Reset zoom before stage reload or victory screen
-	Global.reset_camera_zoom()
-	
-	if Global.is_match_over():
-		print("MATCH OVER!")
+	if current_health <= 0:
+		die()
+	else:
+		Global.trigger_hitstop(0.1, 0.05)
+		get_staggered()
+		
+func die() -> void:
+		is_dead = true
+		HitBox_Shape.set_deferred("disabled", true)
+		sword_visual.visible = false
+		$CollisionShape2D.set_deferred("disabled", true)	
+		# Trigger the death animation
+		anim.play("death")
+		set_physics_process(false)
+		# 1. Trigger dramatic camera zoom centered on this player
+		Global.trigger_fatal_zoom(global_position, 1.4)
+		# Freeze frames briefly for fatal hit weight
+		Global.trigger_hitstop(0.18, 0.02)
+		await get_tree().create_timer(0.8, true, false, true).timeout
+		# Fix Hud
+		Engine.time_scale = 1.0
+		# 2. Reset zoom before stage reload or victory screen
+		Global.reset_camera_zoom()
+		
 		var winner = "PLAYER 2" if player_prefix == "p1" else "PLAYER 1"
 		Global.show_victory_screen(winner)
-	else:
-		get_tree().reload_current_scene()
+
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+
 	
 	

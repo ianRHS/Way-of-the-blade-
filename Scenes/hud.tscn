@@ -1,19 +1,70 @@
 [gd_scene format=3 uid="uid://binsmm51c3858"]
 
 [ext_resource type="Script" uid="uid://cqevxeisov3rc" path="res://Scripts/hud.gd" id="1_37p78"]
+[ext_resource type="Texture2D" uid="uid://y6htptr2m2ex" path="res://Assets/UI BARS/empty_bar.png" id="2_bjfho"]
+[ext_resource type="Texture2D" uid="uid://bnos4l4g24i4w" path="res://Assets/UI BARS/health_bar.png" id="3_6fbih"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbw6q"]
+atlas = ExtResource("2_bjfho")
+region = Rect2(0, 19.892265, 98, 16.350792)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1gob"]
+atlas = ExtResource("3_6fbih")
+region = Rect2(0, 20.027397, 98, 15.9454)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kln2b"]
+atlas = ExtResource("2_bjfho")
+region = Rect2(0.14310074, 20.36114, 98.03552, 15.357168)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgh2o"]
+atlas = ExtResource("3_6fbih")
+region = Rect2(0, 20.161236, 98, 15.67514)
 
 [node name="HUD" type="CanvasLayer" unique_id=1926756454]
 script = ExtResource("1_37p78")
 
-[node name="Label" type="Label" parent="." unique_id=1290676185]
-anchors_preset = -1
-anchor_left = 0.462
-anchor_top = 0.123
-anchor_right = 0.54200006
-anchor_bottom = 0.165
-offset_left = -0.22399902
-offset_top = 4.2959976
-offset_right = 2.6159668
-offset_bottom = 0.0799942
+[node name="VictoryPanel" type="PanelContainer" parent="." unique_id=1397725074]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
-text = "P1: 0 | P2: 0"
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VictoryPanel" unique_id=733571391]
+layout_mode = 2
+
+[node name="WinnerLabel" type="Label" parent="VictoryPanel/VBoxContainer" unique_id=1808769981]
+layout_mode = 2
+text = "PLAYER 1 WINS!"
+
+[node name="RestartButton" type="Button" parent="VictoryPanel/VBoxContainer" unique_id=2142566691]
+layout_mode = 2
+text = "PLAY AGAIN"
+
+[node name="P1HealthBar" type="TextureProgressBar" parent="." unique_id=2086911479]
+offset_right = 98.0
+offset_bottom = 40.0
+max_value = 3.0
+value = 3.0
+texture_under = SubResource("AtlasTexture_pbw6q")
+texture_progress = SubResource("AtlasTexture_v1gob")
+
+[node name="P2HealthBar" type="TextureProgressBar" parent="." unique_id=1045234769]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -98.0
+offset_bottom = 40.0
+grow_horizontal = 0
+max_value = 3.0
+value = 3.0
+fill_mode = 1
+texture_under = SubResource("AtlasTexture_kln2b")
+texture_progress = SubResource("AtlasTexture_rgh2o")

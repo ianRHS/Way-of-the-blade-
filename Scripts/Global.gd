@@ -1,23 +1,17 @@
 extends Node
 
-var p1_score: int = 0
-var p2_score: int = 0
-const WINS_NEEDED: int = 3
+
+var hud = null	
 var camera: Camera2D = null
 
 func shake_camera(amount: float = 8.0) -> void:
 	if camera and is_instance_valid(camera):
 		camera.apply_shake(amount)
 
-func record_defeat(defeated_player: String) -> void:
-	if defeated_player == "p1":
-		p2_score += 1
-	else:
-		p1_score += 1
+
+			
 		
-		
-func is_match_over() -> bool:
-	return p1_score >= WINS_NEEDED or p2_score >= WINS_NEEDED
+
 	
 func trigger_fatal_zoom(focus_pos: Vector2, zoom_factor: float = 1.4) -> void:
 	if camera and is_instance_valid(camera):
@@ -26,6 +20,11 @@ func trigger_fatal_zoom(focus_pos: Vector2, zoom_factor: float = 1.4) -> void:
 func reset_camera_zoom() -> void:
 	if camera and is_instance_valid(camera):
 		camera.reset_zoom()
+		
+func update_health(player: String, current_health: int, max_health: int) -> void:
+	if hud and is_instance_valid(hud):
+		if hud.has_method("update_health_ui"):
+			hud.update_health_ui(player, current_health, max_health)
 
 
 
@@ -85,12 +84,10 @@ func spawn_impact_particles(global_pos: Vector2, is_parry: bool) -> void:
 	# Lifetime management
 	particles.emitting = true
 	# Automatic deletion after lifetime complete
-	await get_tree().create_timer(particles.lifetime + 0.1).timeout
-	particles.queue_free()
+	await get_tree().create_timer(particles.lifetime + 0.1, true, false, true).timeout
+	if is_instance_valid(particles):
+		particles.queue_free()
 	
-func reset_match() -> void:
-	p1_score = 0
-	p2_score = 0
 	
 func trigger_hitstop(duration: float = 0.15, scale: float = 0.05) -> void:
 	Engine.time_scale = scale
@@ -98,44 +95,7 @@ func trigger_hitstop(duration: float = 0.15, scale: float = 0.05) -> void:
 	await get_tree().create_timer(duration, true, false, true).timeout
 	Engine.time_scale = 1.0
 	
-func show_victory_screen(winner_text: String) -> void:
-		var canvas = CanvasLayer.new()
-		canvas.layer = 100
+func show_victory_screen(winner_name: String) -> void:
+	if hud and is_instance_valid(hud):
+		hud.show_victory(winner_name)
 		
-		
-		# Semi-transparent dark background
-		var bg = ColorRect.new()
-		bg.color = Color(0, 0, 0,)
-		bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-		bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		canvas.add_child(bg)
-		
-		# Center alignment container
-		var center = CenterContainer.new()
-		center.set_anchors_preset(Control.PRESET_FULL_RECT)
-		canvas.add_child(center)
-		
-		var vbox = VBoxContainer.new()
-		vbox.add_theme_constant_override("separation", 30)
-		center.add_child(vbox)
-		
-		# Winner announcement label
-		var label = Label.new()
-		label.text = winner_text + " WINS THE MATCH!"
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		# Scale up text appearance if needed via the theme settings
-		vbox.add_child(label)
-		
-		# Rematch button 
-		var btn = Button.new()
-		btn.text = "REMATCH"
-		btn.custom_minimum_size = Vector2(220, 55)
-		
-		# Reset score, unpause, and reload when clicked
-		btn.pressed.connect(func():
-			reset_match()
-			canvas.queue_free() # Destroy the UI
-			get_tree().reload_current_scene()
-		)
-		vbox.add_child(btn)
-		get_tree().current_scene.add_child(canvas)

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ddn8l01e1jr76"]
 
 [ext_resource type="PackedScene" uid="uid://dpgcpbiix8p14" path="res://Scenes/player.tscn" id="1_glv2v"]
-[ext_resource type="PackedScene" uid="uid://binsmm51c3858" path="res://Scenes/hud.tscn" id="2_uu6xs"]
 [ext_resource type="Script" uid="uid://dt6aru0gm20aq" path="res://Scripts/Camera.gd" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://binsmm51c3858" path="res://Scenes/hud.tscn" id="3_rgh2o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(1152, 18)
@@ -44,20 +44,8 @@ shape = SubResource("RectangleShape2D_05dxr")
 position = Vector2(1158, 324)
 shape = SubResource("RectangleShape2D_05dxr")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1786918077]
-
-[node name="StatusLabel" type="Label" parent="HUD" unique_id=168185239]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -66.0
-offset_right = 66.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "READY . . . FIGHT!"
-
-[node name="Score tracker" parent="." unique_id=1926756454 instance=ExtResource("2_uu6xs")]
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1704914151]
 position = Vector2(576, 323)
 script = ExtResource("3_kln2b")
+
+[node name="HUD" parent="." unique_id=1926756454 instance=ExtResource("3_rgh2o")]
