@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c8j1tyw7fjtyn"]
+
+[ext_resource type="Script" uid="uid://c7ulxtay55khj" path="res://Scripts/main_menu.gd" id="1_853f1"]
+[ext_resource type="Texture2D" uid="uid://brdjrjf33j6lg" path="res://Assets/Free-Summer-Pixel-Art-Backgrounds/Way of the blade main menu.jpg" id="1_tt5f1"]
+
+[node name="MainMenu" type="Control" unique_id=962999755]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_853f1")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1854430553]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_tt5f1")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1389153744]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.5
+offset_top = 60.0
+offset_right = 74.5
+offset_bottom = 212.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 17
+alignment = 1
+
+[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1809670397]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.21176471, 0.09411765, 0.08627451, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/line_spacing = 12
+theme_override_font_sizes/font_size = 50
+text = "START"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=597281306]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.21568628, 0.09803922, 0.09019608, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/line_spacing = 5
+theme_override_font_sizes/font_size = 50
+text = "EXIT"
