@@ -33,6 +33,10 @@ func _ready() -> void:
 	Global.update_health(player_prefix, current_health, max_health)
 
 func _physics_process(delta: float) -> void:
+	if not Global.round_active:
+		return
+	
+	
 	if is_dead:
 		return
 		
@@ -302,8 +306,8 @@ func die() -> void:
 		# 2. Reset zoom before stage reload or victory screen
 		Global.reset_camera_zoom()
 		
-		var winner = "PLAYER 2" if player_prefix == "p1" else "PLAYER 1"
-		Global.show_victory_screen(winner)
+		var round_winner = "p2" if player_prefix == "p1" else "p1"
+		Global.record_round_win(round_winner)
 
 	
 	

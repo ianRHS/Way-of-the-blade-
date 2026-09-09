@@ -1,8 +1,34 @@
 extends Node
 
-
+var p1_rounds: int = 0
+var p2_rounds: int = 0
 var hud = null	
 var camera: Camera2D = null
+var round_active: bool = true
+
+func record_round_win(winner: String) -> void:
+	if not round_active: return
+	round_active = false
+	
+	
+	var clean = winner.strip_edges().to_lower()
+	if clean == "p1":
+		p1_rounds += 1
+	elif clean == "p2":
+		p2_rounds += 1
+		
+	if hud and is_instance_valid(hud):
+		hud.update_round_display(p1_rounds, p2_rounds)
+		
+	# Check match for victory
+	if p1_rounds>= 3 or p2_rounds >= 3:
+		hud.show_victory("PLAYER 1 WINS THE MATCH" if p1_rounds >= 3 else "PLAYER 2 WINS THE MATCH")
+	else:
+		await get_tree().create_timer(1.0).timeout
+		round_active = true
+		get_tree().reload_current_scene()
+
+
 
 func shake_camera(amount: float = 8.0) -> void:
 	if camera and is_instance_valid(camera):
@@ -98,4 +124,9 @@ func trigger_hitstop(duration: float = 0.15, scale: float = 0.05) -> void:
 func show_victory_screen(winner_name: String) -> void:
 	if hud and is_instance_valid(hud):
 		hud.show_victory(winner_name)
+		
+func reset_match() -> void:
+	p1_rounds = 0
+	p2_rounds = 0
+	round_active = true
 		

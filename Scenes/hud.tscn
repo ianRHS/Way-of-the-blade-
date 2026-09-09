@@ -1,8 +1,17 @@
 [gd_scene format=3 uid="uid://binsmm51c3858"]
 
 [ext_resource type="Script" uid="uid://cqevxeisov3rc" path="res://Scripts/hud.gd" id="1_37p78"]
+[ext_resource type="Texture2D" uid="uid://jjvp3monvule" path="res://Assets/Pixel UI pack 3/06.png" id="2_6fbih"]
 [ext_resource type="Texture2D" uid="uid://y6htptr2m2ex" path="res://Assets/UI BARS/empty_bar.png" id="2_bjfho"]
 [ext_resource type="Texture2D" uid="uid://bnos4l4g24i4w" path="res://Assets/UI BARS/health_bar.png" id="3_6fbih"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jye8"]
+atlas = ExtResource("2_6fbih")
+region = Rect2(43.928947, 209.83455, 9.216583, 11.2894745)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43w4t"]
+atlas = ExtResource("2_6fbih")
+region = Rect2(12.299725, 211.80289, 8.618114, 9.425629)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pbw6q"]
 atlas = ExtResource("2_bjfho")
@@ -22,6 +31,8 @@ region = Rect2(0, 20.161236, 98, 15.67514)
 
 [node name="HUD" type="CanvasLayer" unique_id=1926756454]
 script = ExtResource("1_37p78")
+filled_dot_texture = SubResource("AtlasTexture_8jye8")
+empty_dot_texture = SubResource("AtlasTexture_43w4t")
 
 [node name="VictoryPanel" type="PanelContainer" parent="." unique_id=1397725074]
 visible = false
@@ -49,26 +60,65 @@ layout_mode = 2
 text = "PLAY AGAIN"
 
 [node name="P1HealthBar" type="TextureProgressBar" parent="." unique_id=2086911479]
-offset_right = 98.0
-offset_bottom = 16.0
-scale = Vector2(2, 2)
+anchors_preset = -1
+anchor_left = 0.07700001
+anchor_top = 0.134
+anchor_right = 0.37500003
+anchor_bottom = 0.22100002
+offset_left = 1.29599
+offset_top = -2.831993
+offset_right = -244.00003
+offset_bottom = -43.208
+scale = Vector2(3.5, 3.5)
 max_value = 3.0
 value = 3.0
 texture_under = SubResource("AtlasTexture_pbw6q")
 texture_progress = SubResource("AtlasTexture_v1gob")
 
 [node name="P2HealthBar" type="TextureProgressBar" parent="." unique_id=1045234769]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -197.0
-offset_top = 1.0
-offset_right = -99.0
-offset_bottom = 16.0
+anchors_preset = -1
+anchor_left = 0.63600004
+anchor_top = 0.15
+anchor_right = 0.934
+anchor_bottom = 0.231
+offset_left = 4.328003
+offset_top = -11.200005
+offset_right = -240.96796
+offset_bottom = -48.54515
 grow_horizontal = 0
-scale = Vector2(2, 2)
+scale = Vector2(3.5, 3.5)
 max_value = 3.0
 value = 3.0
 fill_mode = 1
 texture_under = SubResource("AtlasTexture_kln2b")
 texture_progress = SubResource("AtlasTexture_rgh2o")
+
+[node name="P1RoundIcons" type="HBoxContainer" parent="." unique_id=590704614]
+offset_left = 398.0
+offset_top = 144.0
+offset_right = 505.0
+offset_bottom = 184.0
+
+[node name="Dot1" type="TextureRect" parent="P1RoundIcons" unique_id=2102490941]
+layout_mode = 2
+
+[node name="Dot2" type="TextureRect" parent="P1RoundIcons" unique_id=1109540506]
+layout_mode = 2
+
+[node name="Dot3" type="TextureRect" parent="P1RoundIcons" unique_id=1536003527]
+layout_mode = 2
+
+[node name="P2RoundIcons" type="HBoxContainer" parent="." unique_id=14448837]
+offset_left = 734.0
+offset_top = 146.0
+offset_right = 840.0
+offset_bottom = 186.0
+
+[node name="Dot1" type="TextureRect" parent="P2RoundIcons" unique_id=1431527406]
+layout_mode = 2
+
+[node name="Dot2" type="TextureRect" parent="P2RoundIcons" unique_id=544235561]
+layout_mode = 2
+
+[node name="Dot3" type="TextureRect" parent="P2RoundIcons" unique_id=1914695690]
+layout_mode = 2
