@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b5x1nfrmc3t54"]
+
+[ext_resource type="Script" uid="uid://ckavf866hjsw0" path="res://Scripts/pause_menu.gd" id="1_emv3i"]
+
+[node name="PauseMenu" type="Control" unique_id=195141643]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_emv3i")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1139782686]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18000486, 0.18000486, 0.18000486, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=843995244]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -50.5
+offset_right = 52.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=1100704848]
+layout_mode = 2
+text = "RESUME"
+
+[node name="RestartButton" type="Button" parent="VBoxContainer" unique_id=351203604]
+layout_mode = 2
+text = "RESTART"
+
+[node name="MainMenuButton" type="Button" parent="VBoxContainer" unique_id=1500365433]
+layout_mode = 2
+text = "MAIN MENU"

@@ -5,13 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://y6htptr2m2ex" path="res://Assets/UI BARS/empty_bar.png" id="2_bjfho"]
 [ext_resource type="Texture2D" uid="uid://bnos4l4g24i4w" path="res://Assets/UI BARS/health_bar.png" id="3_6fbih"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8jye8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fbih"]
 atlas = ExtResource("2_6fbih")
-region = Rect2(43.928947, 209.83455, 9.216583, 11.2894745)
+region = Rect2(2.8960252, 20.85099, 42.245125, 7.234251)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_43w4t"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1xeu"]
 atlas = ExtResource("2_6fbih")
-region = Rect2(12.299725, 211.80289, 8.618114, 9.425629)
+region = Rect2(194.70215, 20.845924, 42.566208, 7.241955)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pbw6q"]
 atlas = ExtResource("2_bjfho")
@@ -31,8 +31,8 @@ region = Rect2(0, 20.161236, 98, 15.67514)
 
 [node name="HUD" type="CanvasLayer" unique_id=1926756454]
 script = ExtResource("1_37p78")
-filled_dot_texture = SubResource("AtlasTexture_8jye8")
-empty_dot_texture = SubResource("AtlasTexture_43w4t")
+filled_dot_texture = SubResource("AtlasTexture_6fbih")
+empty_dot_texture = SubResource("AtlasTexture_t1xeu")
 
 [node name="VictoryPanel" type="PanelContainer" parent="." unique_id=1397725074]
 visible = false
@@ -94,10 +94,11 @@ texture_under = SubResource("AtlasTexture_kln2b")
 texture_progress = SubResource("AtlasTexture_rgh2o")
 
 [node name="P1RoundIcons" type="HBoxContainer" parent="." unique_id=590704614]
-offset_left = 398.0
+offset_left = 179.0
 offset_top = 144.0
-offset_right = 505.0
+offset_right = 408.0
 offset_bottom = 184.0
+alignment = 2
 
 [node name="Dot1" type="TextureRect" parent="P1RoundIcons" unique_id=2102490941]
 layout_mode = 2
@@ -109,9 +110,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="P2RoundIcons" type="HBoxContainer" parent="." unique_id=14448837]
-offset_left = 734.0
+offset_left = 748.0
 offset_top = 146.0
-offset_right = 840.0
+offset_right = 980.0
 offset_bottom = 186.0
 
 [node name="Dot1" type="TextureRect" parent="P2RoundIcons" unique_id=1431527406]

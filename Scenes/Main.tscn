@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dpgcpbiix8p14" path="res://Scenes/player.tscn" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://dt6aru0gm20aq" path="res://Scripts/Camera.gd" id="3_kln2b"]
 [ext_resource type="PackedScene" uid="uid://binsmm51c3858" path="res://Scenes/hud.tscn" id="3_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://b5x1nfrmc3t54" path="res://Scenes/pause_menu.tscn" id="4_rgh2o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(1152, 18)
@@ -49,3 +50,5 @@ position = Vector2(576, 323)
 script = ExtResource("3_kln2b")
 
 [node name="HUD" parent="." unique_id=1926756454 instance=ExtResource("3_rgh2o")]
+
+[node name="PauseMenu" parent="HUD" unique_id=195141643 instance=ExtResource("4_rgh2o")]

@@ -196,7 +196,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vfarp")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Idle",
 "speed": 10.0
 }, {
@@ -210,7 +210,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yh6i2")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Stagger",
 "speed": 10.0
 }, {
@@ -242,7 +242,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7ldla")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Walk",
 "speed": 10.0
 }, {
@@ -259,7 +259,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fd4e3")
 }],
-"loop": 0,
+"loop": false,
 "name": &"attack_1",
 "speed": 10.0
 }, {
@@ -279,7 +279,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_olqyp")
 }],
-"loop": 0,
+"loop": false,
 "name": &"attack_2",
 "speed": 12.0
 }, {
@@ -296,7 +296,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p1odr")
 }],
-"loop": 0,
+"loop": false,
 "name": &"attack_3",
 "speed": 10.0
 }, {
@@ -319,7 +319,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3vlem")
 }],
-"loop": 0,
+"loop": false,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -330,7 +330,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nmr2m")
 }],
-"loop": 0,
+"loop": false,
 "name": &"guard",
 "speed": 10.0
 }]
@@ -354,6 +354,7 @@ shape = SubResource("RectangleShape2D_05dxr")
 [node name="Pivot" type="Node2D" parent="." unique_id=1922331350]
 
 [node name="Hitbox" type="Area2D" parent="Pivot" unique_id=691388960]
+visible = false
 collision_layer = 2
 
 [node name="HitBoxShape" type="CollisionShape2D" parent="Pivot/Hitbox" unique_id=1694097430]
