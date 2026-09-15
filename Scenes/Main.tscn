@@ -5,12 +5,28 @@
 [ext_resource type="PackedScene" uid="uid://binsmm51c3858" path="res://Scenes/hud.tscn" id="3_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://b5x1nfrmc3t54" path="res://Scenes/pause_menu.tscn" id="4_rgh2o"]
 [ext_resource type="Texture2D" uid="uid://cvtx2k382ldwh" path="res://Assets/e5a8aeeb-32ca-4c44-bbd0-1733f2adb2d7.jpg" id="5_pbw6q"]
+[ext_resource type="Texture2D" uid="uid://m36ehsowkb7w" path="res://Assets/leaf_pack/folhas_verde.png" id="6_v1gob"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(1152, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05dxr"]
 size = Vector2(10, 648)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw32o"]
+atlas = ExtResource("6_v1gob")
+region = Rect2(355.9999, 514.41797, 12.5, 8.979004)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_50glp"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 1, 1)
+angle_min = -22.19999
+angle_max = 360.00003
+angular_velocity_min = -45.000015
+angular_velocity_max = 44.999985
+gravity = Vector3(30, 40, 0)
+turbulence_noise_speed = Vector3(1, 1, 0)
 
 [node name="Main" type="Node2D" unique_id=2001256775]
 
@@ -66,3 +82,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_pbw6q")
 expand_mode = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1102532930]
+position = Vector2(566, -69)
+amount = 40
+texture = SubResource("AtlasTexture_jw32o")
+lifetime = 10.0
+preprocess = 15.0
+process_material = SubResource("ParticleProcessMaterial_50glp")
