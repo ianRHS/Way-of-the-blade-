@@ -25,8 +25,13 @@ angle_min = -22.19999
 angle_max = 360.00003
 angular_velocity_min = -45.000015
 angular_velocity_max = 44.999985
-gravity = Vector3(30, 40, 0)
-turbulence_noise_speed = Vector3(1, 1, 0)
+gravity = Vector3(30, 50, 0)
+turbulence_noise_strength = 5.0
+turbulence_noise_scale = 3.0
+turbulence_noise_speed = Vector3(0.5, 0.5, 0.5)
+turbulence_noise_speed_random = 0.0
+turbulence_influence_min = 0.2
+turbulence_influence_max = 0.8
 
 [node name="Main" type="Node2D" unique_id=2001256775]
 
