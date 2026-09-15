@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -400.0
 @export var max_health: int = 3
 
 
+
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking: bool = false
 var is_guarding: bool = false
@@ -19,10 +20,13 @@ var can_dash_right: bool = false
 var current_health: int
 
 
+
+
 # Ensure node paths match your Scene dock exactly (Case Sensitive)
 @onready var HitBox_Shape: CollisionShape2D = $Pivot/Hitbox/HitBoxShape
 @onready var sword_visual: ColorRect = $Pivot/Hitbox/SwordVisual
 @onready var anim: AnimatedSprite2D = $Pivot/CharacterAnim
+
 
 func _ready() -> void:
 	current_health = max_health

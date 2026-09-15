@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://curnf5u1n4mim"]
+
+[ext_resource type="Script" uid="uid://fmvswsfde37b" path="res://Scripts/victory_menu.gd" id="1_1sayv"]
+[ext_resource type="Texture2D" uid="uid://bl7pmv1blj7ih" path="res://Assets/4710b0fe-b8ec-4b06-8868-59dd011037aa.jpg" id="2_why5a"]
+
+[node name="VictoryMenu" type="CanvasLayer" unique_id=1413017773]
+process_mode = 3
+script = ExtResource("1_1sayv")
+
+[node name="Control" type="Control" parent="." unique_id=423978740]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundTint" type="ColorRect" parent="Control" unique_id=1474529900]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.32156864, 0.32156864, 0.32156864, 0.7254902)
+
+[node name="VictoryBanner" type="TextureRect" parent="Control" unique_id=1283398718]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_why5a")
+
+[node name="WinnerText" type="Label" parent="Control" unique_id=428350612]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 26.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+text = "PLAYER 1 WINS!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Control" unique_id=1484879842]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.629
+anchor_right = 0.5
+anchor_bottom = 0.629
+offset_left = -52.0
+offset_top = -14.5920105
+offset_right = 52.0
+offset_bottom = 165.40799
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RematchButton" type="Button" parent="Control/ButtonContainer" unique_id=393874237]
+layout_mode = 2
+text = "REMATCH"
+
+[node name="MainMenuButton" type="Button" parent="Control/ButtonContainer" unique_id=954569909]
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="ExitButton" type="Button" parent="Control/ButtonContainer" unique_id=534201581]
+layout_mode = 2
+text = "EXIT"

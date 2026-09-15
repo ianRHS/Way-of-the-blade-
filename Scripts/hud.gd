@@ -1,6 +1,8 @@
 extends CanvasLayer
 
+signal time_over
 
+@export var total_time: int = 60
 @onready var p1_round_dots: Array = [$P1RoundIcons/Dot1, $P1RoundIcons/Dot2, $P1RoundIcons/Dot3]
 @onready var p2_round_dots: Array = [$P2RoundIcons/Dot1, $P2RoundIcons/Dot2, $P2RoundIcons/Dot3]
 @onready var p1_health_bar: TextureProgressBar = $P1HealthBar
@@ -8,9 +10,13 @@ extends CanvasLayer
 @onready var victory_panel: PanelContainer = $VictoryPanel
 @onready var winner_label: Label = $VictoryPanel/VBoxContainer/WinnerLabel
 @onready var restart_button: Button = $VictoryPanel/VBoxContainer/RestartButton
+@onready var timer_label: Label = $TimerLabel # Adjust path to match your layout
+@onready var match_timer: Timer = $MatchTimer
 
 @export var filled_dot_texture: Texture2D
 @export var empty_dot_texture: Texture2D
+
+var current_time: int
 
 func update_round_display(p1_wins: int, p2_wins: int) -> void:
 	for i in range(p1_round_dots.size()):
@@ -29,10 +35,36 @@ func update_round_display(p1_wins: int, p2_wins: int) -> void:
 
 
 func _ready() -> void:
+	start_round_timer()
 	update_round_display(Global.p1_rounds, Global.p2_rounds)
 	Global.hud = self
 	victory_panel.visible = false
 	restart_button.pressed.connect(_on_restart_pressed)
+	
+func start_round_timer() -> void:
+	current_time = total_time
+	update_timer_display()
+	
+	match_timer.wait_time = 1.0
+	match_timer.one_shot = false
+	if not match_timer.timeout.is_connected(_on_timer_tick):
+		match_timer.timeout.connect(_on_timer_tick)
+	match_timer.start()
+	
+func update_timer_display() -> void:
+	# Formats single digits with a leading zero (e.g., "09")
+	timer_label.text = "%02d" % current_time
+	
+func _on_timer_tick() -> void:
+	if current_time > 0:
+		current_time -= 1
+		update_timer_display()
+		if current_time <= 10:
+			timer_label.modulate = Color(1, 0.2, 0.2) # Flashes/turns red in final 10s
+			
+		if current_time == 0:
+			match_timer.stop()
+			time_over.emit()
 	
 func update_health_ui(player: String, current: int, maximum: int) -> void:
 	print("HUD updating for ", player, " -> Value: ", current)
@@ -52,3 +84,7 @@ func show_victory(winner_name: String) -> void:
 func _on_restart_pressed() -> void:
 	Global.reset_match()
 	get_tree().reload_current_scene()
+
+
+func _on_time_over() -> void:
+	get_tree().paused = true # Freeze physics and inputs
