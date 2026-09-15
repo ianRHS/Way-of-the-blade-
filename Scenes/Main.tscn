@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dt6aru0gm20aq" path="res://Scripts/Camera.gd" id="3_kln2b"]
 [ext_resource type="PackedScene" uid="uid://binsmm51c3858" path="res://Scenes/hud.tscn" id="3_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://b5x1nfrmc3t54" path="res://Scenes/pause_menu.tscn" id="4_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://cvtx2k382ldwh" path="res://Assets/e5a8aeeb-32ca-4c44-bbd0-1733f2adb2d7.jpg" id="5_pbw6q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(1152, 18)
@@ -16,20 +17,21 @@ size = Vector2(10, 648)
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1427900738]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=523584079]
-position = Vector2(576, 639)
+position = Vector2(574, 575)
 shape = SubResource("RectangleShape2D_xnrmw")
 
 [node name="ColorRect" type="ColorRect" parent="Floor" unique_id=565232438]
-offset_top = 630.0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_left = -2.0
+offset_top = 566.0
+offset_right = 1150.0
+offset_bottom = 584.0
 
 [node name="Player 1" parent="." unique_id=217431882 node_paths=PackedStringArray("opponent") instance=ExtResource("1_glv2v")]
-position = Vector2(293, 590)
+position = Vector2(254, 473)
 opponent = NodePath("../Player 2")
 
 [node name="Player 2" parent="." unique_id=1135110097 node_paths=PackedStringArray("opponent") instance=ExtResource("1_glv2v")]
-position = Vector2(937, 590)
+position = Vector2(877, 478)
 player_prefix = "p2"
 opponent = NodePath("../Player 1")
 
@@ -52,3 +54,15 @@ script = ExtResource("3_kln2b")
 [node name="HUD" parent="." unique_id=1926756454 instance=ExtResource("3_rgh2o")]
 
 [node name="PauseMenu" parent="HUD" unique_id=195141643 instance=ExtResource("4_rgh2o")]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=515063896]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_pbw6q")
+expand_mode = 1
