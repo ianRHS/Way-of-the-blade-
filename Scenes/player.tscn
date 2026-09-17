@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dv0j8w1hokmks" path="res://Assets/Samurai assets/Samurai/Hurt.png" id="6_gymyn"]
 [ext_resource type="Texture2D" uid="uid://05dkr33ocr4q" path="res://Assets/Samurai assets/Samurai/Dead.png" id="8_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://duencn6ci3w8a" path="res://Assets/Samurai assets/Samurai/Protection.png" id="8_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://doagwbsbvhym8" path="res://Assets/Samurai assets/Samurai/Jump.png" id="10_tx1dd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(26, 50)
@@ -167,6 +168,26 @@ region = Rect2(512, 0, 128, 128)
 atlas = ExtResource("8_f1ek2")
 region = Rect2(640, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_57lvd"]
+atlas = ExtResource("10_tx1dd")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie7r7"]
+atlas = ExtResource("10_tx1dd")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq3lt"]
+atlas = ExtResource("10_tx1dd")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pukcj"]
+atlas = ExtResource("10_tx1dd")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1htnp"]
+atlas = ExtResource("10_tx1dd")
+region = Rect2(1024, 0, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_r7t2e"]
 atlas = ExtResource("8_pu2lt")
 region = Rect2(0, 0, 128, 128)
@@ -174,6 +195,10 @@ region = Rect2(0, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_nmr2m"]
 atlas = ExtResource("8_pu2lt")
 region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6mvm"]
+atlas = ExtResource("10_tx1dd")
+region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_05dxr"]
 animations = [{
@@ -325,6 +350,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_57lvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie7r7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq3lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pukcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1htnp")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_r7t2e")
 }, {
 "duration": 1.0,
@@ -333,6 +378,14 @@ animations = [{
 "loop": false,
 "name": &"guard",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6mvm")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=217431882]
@@ -383,10 +436,9 @@ offset_bottom = 25.0
 [node name="CharacterAnim" type="AnimatedSprite2D" parent="Pivot" unique_id=856848261]
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_05dxr")
-animation = &"attack_2"
+animation = &"jump"
 autoplay = "Idle"
-frame = 4
-frame_progress = 1.0
+frame_progress = 0.17312115
 offset = Vector2(0, -33)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

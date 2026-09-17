@@ -121,7 +121,12 @@ func _physics_process(delta: float) -> void:
 	
 	# Update ground movement visuals when not performing an action
 	if not is_attacking and not is_guarding and not is_staggered:
-		if abs(velocity.x) > 10.0:
+		if not is_on_floor():
+			if velocity.y < 0:
+				anim.play("jump")
+			else:
+				anim.play("fall")
+		elif abs(velocity.x) > 10.0:
 			anim.play("Walk")
 		else:
 			anim.play("Idle")
@@ -331,4 +336,4 @@ func reset_player() -> void:
 	
 	# 4. Reset visuals back to normal
 	modulate = Color.WHITE
-	anim.play("Idle")
+	anim.play("Idle")	
