@@ -106,6 +106,7 @@ process_material = SubResource("ParticleProcessMaterial_50glp")
 
 [node name="VictoryMenu" type="CanvasLayer" parent="." unique_id=747801022]
 process_mode = 3
+visible = false
 script = ExtResource("8_vy5pj")
 
 [node name="Control" type="Control" parent="VictoryMenu" unique_id=329348348]
