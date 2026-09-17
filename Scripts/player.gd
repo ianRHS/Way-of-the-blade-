@@ -7,6 +7,8 @@ const JUMP_VELOCITY = -400.0
 @export var opponent: CharacterBody2D
 @export var max_health: int = 3
 
+signal player_died(loser_prefix: String)
+
 
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -150,7 +152,7 @@ func attack() -> void:
 	anim.play("attack_" + str(attack_num))
 	
 	# Set target strike frame based on variation (attack 2 hits on frame 4, others on frame 2)
-	var hit_frame: int = 4 if attack_num == 2 else 2
+	var _hit_frame: int = 4 if attack_num == 2 else 2
 	
 	
 	# Wait until the blade actually swings forward (e.g., frame 1)
@@ -310,25 +312,23 @@ func die() -> void:
 		# 2. Reset zoom before stage reload or victory screen
 		Global.reset_camera_zoom()
 		
-		var round_winner = "p2" if player_prefix == "p1" else "p1"
-		Global.record_round_win(round_winner)
-
+		player_died.emit(player_prefix)
+		
+func reset_player() -> void:
+	# 1. Reset all states
+	is_dead = false
+	is_staggered = false
+	is_attacking = false
+	is_guarding = false
 	
+	# 2. Turn physics and collisions back on
+	set_physics_process(true)
+	$CollisionShape2D.set_deferred("disabled", false)
 	
+	# 3. Disable hitboxes just in case
+	HitBox_Shape.set_deferred("disabled", true)
+	sword_visual.visible = false
 	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-
-	
-	
+	# 4. Reset visuals back to normal
+	modulate = Color.WHITE
+	anim.play("Idle")

@@ -11,6 +11,8 @@ func _ready() -> void:
 	main_menu_button.pressed.connect(_on_main_menu_pressed)
 	
 func _unhandled_input(event: InputEvent) -> void:
+	if not Global.round_active: return
+	
 	if event.is_action_pressed("ui_cancel"): # Escape Key
 		visible = not visible
 		get_tree().paused = visible

@@ -65,6 +65,9 @@ func _on_timer_tick() -> void:
 		if current_time == 0:
 			match_timer.stop()
 			time_over.emit()
+			
+func stop_round_timer() -> void:
+	match_timer.stop()
 	
 func update_health_ui(player: String, current: int, maximum: int) -> void:
 	print("HUD updating for ", player, " -> Value: ", current)
@@ -84,7 +87,3 @@ func show_victory(winner_name: String) -> void:
 func _on_restart_pressed() -> void:
 	Global.reset_match()
 	get_tree().reload_current_scene()
-
-
-func _on_time_over() -> void:
-	get_tree().paused = true # Freeze physics and inputs
