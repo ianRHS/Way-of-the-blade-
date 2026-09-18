@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://dvrxcxeg2hsqg"]
+
+[ext_resource type="Script" uid="uid://creb7l6l77uyk" path="res://Scripts/dummy.gd" id="1_5d6mj"]
+[ext_resource type="Texture2D" uid="uid://b8j1g5140p3op" path="res://Assets/Samurai assets/Samurai_Commander/Idle.png" id="1_x66xh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5d6mj"]
+atlas = ExtResource("1_x66xh")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0uyp"]
+atlas = ExtResource("1_x66xh")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3clv1"]
+atlas = ExtResource("1_x66xh")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tnuu"]
+atlas = ExtResource("1_x66xh")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uy75"]
+atlas = ExtResource("1_x66xh")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cnweq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5d6mj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0uyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3clv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tnuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uy75")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oicnb"]
+size = Vector2(40, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_72ywh"]
+size = Vector2(40, 74)
+
+[node name="Dummy" type="CharacterBody2D" unique_id=1733478735]
+script = ExtResource("1_5d6mj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=554861979]
+sprite_frames = SubResource("SpriteFrames_cnweq")
+frame = 1
+frame_progress = 0.69457614
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1818514015]
+position = Vector2(-4, 27)
+shape = SubResource("RectangleShape2D_oicnb")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1099184302]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=995064081]
+position = Vector2(-4, 27)
+shape = SubResource("RectangleShape2D_72ywh")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
