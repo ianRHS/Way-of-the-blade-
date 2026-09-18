@@ -438,7 +438,7 @@ scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_05dxr")
 animation = &"jump"
 autoplay = "Idle"
-frame_progress = 0.17312115
+frame_progress = 0.5705452
 offset = Vector2(0, -33)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
