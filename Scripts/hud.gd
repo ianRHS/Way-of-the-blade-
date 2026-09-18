@@ -45,6 +45,8 @@ func start_round_timer() -> void:
 	current_time = total_time
 	update_timer_display()
 	
+	timer_label.modulate = Color.WHITE
+	
 	match_timer.wait_time = 1.0
 	match_timer.one_shot = false
 	if not match_timer.timeout.is_connected(_on_timer_tick):
