@@ -1,3 +1,37 @@
 [gd_scene format=3 uid="uid://cb1j1fs6cdxj4"]
 
+[ext_resource type="Texture2D" uid="uid://ccuuk4c01yw5o" path="res://Assets/561bf6a3-e00d-43da-a98f-943722cf1896.jpg" id="1_ka2pi"]
+[ext_resource type="PackedScene" uid="uid://dpgcpbiix8p14" path="res://Scenes/player.tscn" id="2_omtrn"]
+[ext_resource type="PackedScene" uid="uid://dvrxcxeg2hsqg" path="res://Scenes/dummy.tscn" id="3_i6t4g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feyax"]
+size = Vector2(1152, 18)
+
 [node name="Tutorial" type="Node2D" unique_id=341382106]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=77241561]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_ka2pi")
+metadata/_edit_lock_ = true
+
+[node name="Floor" type="StaticBody2D" parent="TextureRect" unique_id=1171247417]
+visible = false
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextureRect/Floor" unique_id=1918367203]
+position = Vector2(574, 575)
+shape = SubResource("RectangleShape2D_feyax")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect/Floor" unique_id=1693494030]
+offset_left = -2.0
+offset_top = 566.0
+offset_right = 1150.0
+offset_bottom = 584.0
+
+[node name="Dummy" parent="." unique_id=1733478735 instance=ExtResource("3_i6t4g")]
+position = Vector2(880, 360.00003)
+scale = Vector2(3, 3)
+
+[node name="Player1" parent="." unique_id=217431882 instance=ExtResource("2_omtrn")]
+position = Vector2(208, 480)
