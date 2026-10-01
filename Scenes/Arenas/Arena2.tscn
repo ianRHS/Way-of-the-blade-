@@ -97,6 +97,7 @@ expand_mode = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1102532930]
 position = Vector2(566, -69)
+emitting = false
 amount = 40
 texture = SubResource("AtlasTexture_jw32o")
 lifetime = 10.0

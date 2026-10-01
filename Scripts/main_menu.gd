@@ -5,10 +5,16 @@ extends Control
 @onready var quit_button: Button = $VBoxContainer/QuitButton
 
 func _ready() -> void:
+	if OS.has_feature("web"):
+		# Completely removes the exit button so it doesn't show up in the browser
+		$VBoxContainer/QuitButton.queue_free()
 	start_button.grab_focus()
 	start_button.pressed.connect(_on_start_pressed)
 	tutorial_button.pressed.connect(_on_tutorial_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
+	
+	
+	
 
 func _on_start_pressed() -> void:
 	# Change this to point to your new Map Select scene
@@ -16,7 +22,7 @@ func _on_start_pressed() -> void:
 	
 func _on_tutorial_pressed() -> void:
 	# Adjust this path if your tutorial menu is saved in a different folder
-	get_tree().change_scene_to_file("res://scenes/tutorial_menu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/tutorial_menu.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

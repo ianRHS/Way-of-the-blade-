@@ -13,6 +13,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(1152, 18)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_1wlll"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05dxr"]
 size = Vector2(10, 648)
 
@@ -62,6 +64,7 @@ opponent = NodePath("../Player2")
 position = Vector2(877, 478)
 player_prefix = "p2"
 opponent = NodePath("../Player1")
+character_frames = SubResource("SpriteFrames_1wlll")
 
 [node name="LeftWall" type="StaticBody2D" parent="." unique_id=594525251]
 
