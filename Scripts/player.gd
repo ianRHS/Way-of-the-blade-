@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -400.0
 @export var player_prefix: String = "p1"
 @export var opponent: CharacterBody2D
 @export var max_health: int = 3
+@export var character_frames: SpriteFrames
 
 signal player_died(loser_prefix: String)
 
@@ -28,6 +29,7 @@ var current_health: int
 @onready var HitBox_Shape: CollisionShape2D = $Pivot/Hitbox/HitBoxShape
 @onready var sword_visual: ColorRect = $Pivot/Hitbox/SwordVisual
 @onready var anim: AnimatedSprite2D = $Pivot/CharacterAnim
+@onready var animated_sprite: AnimatedSprite2D = $Pivot/CharacterAnim
 
 
 func _ready() -> void:
@@ -37,6 +39,10 @@ func _ready() -> void:
 	HitBox_Shape.set_deferred("disabled", true)
 	sword_visual.visible = false
 	Global.update_health(player_prefix, current_health, max_health)
+	
+	# If a custom sprite frames resource is assigned, apply it to Player 2
+	if character_frames:
+		animated_sprite.sprite_frames = character_frames
 
 func _physics_process(delta: float) -> void:
 	if not Global.round_active:
