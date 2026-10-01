@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://curnf5u1n4mim"]
 
 [ext_resource type="Script" uid="uid://fmvswsfde37b" path="res://Scripts/victory_menu.gd" id="1_1sayv"]
-[ext_resource type="Texture2D" uid="uid://bl7pmv1blj7ih" path="res://Assets/4710b0fe-b8ec-4b06-8868-59dd011037aa.jpg" id="2_why5a"]
+[ext_resource type="Texture2D" uid="uid://bl7pmv1blj7ih" path="res://Assets/Textures/4710b0fe-b8ec-4b06-8868-59dd011037aa.jpg" id="2_why5a"]
 
 [node name="VictoryMenu" type="CanvasLayer" unique_id=1413017773]
 process_mode = 3

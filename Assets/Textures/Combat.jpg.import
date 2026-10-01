@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccuuk4c01yw5o"
-path="res://.godot/imported/561bf6a3-e00d-43da-a98f-943722cf1896.jpg-41017e487945c3bb4dc88acc64354e57.ctex"
+uid="uid://ccrwqxothr7rn"
+path="res://.godot/imported/Combat.jpg-261eb70b3eab1f9688dbdb1169097542.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/561bf6a3-e00d-43da-a98f-943722cf1896.jpg"
-dest_files=["res://.godot/imported/561bf6a3-e00d-43da-a98f-943722cf1896.jpg-41017e487945c3bb4dc88acc64354e57.ctex"]
+source_file="res://Assets/Textures/Combat.jpg"
+dest_files=["res://.godot/imported/Combat.jpg-261eb70b3eab1f9688dbdb1169097542.ctex"]
 
 [params]
 

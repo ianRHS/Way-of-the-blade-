@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Samurai 1v1 fighting game"
+config/name="Way of the blade"
 run/main_scene="uid://c8j1tyw7fjtyn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 

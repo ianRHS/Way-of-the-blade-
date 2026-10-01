@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://dt6aru0gm20aq" path="res://Scripts/Camera.gd" id="3_kln2b"]
 [ext_resource type="PackedScene" uid="uid://binsmm51c3858" path="res://Scenes/hud.tscn" id="3_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://b5x1nfrmc3t54" path="res://Scenes/pause_menu.tscn" id="4_rgh2o"]
-[ext_resource type="Texture2D" uid="uid://cvtx2k382ldwh" path="res://Assets/e5a8aeeb-32ca-4c44-bbd0-1733f2adb2d7.jpg" id="5_pbw6q"]
+[ext_resource type="Texture2D" uid="uid://cvtx2k382ldwh" path="res://Assets/Arenas/e5a8aeeb-32ca-4c44-bbd0-1733f2adb2d7.jpg" id="5_pbw6q"]
 [ext_resource type="Texture2D" uid="uid://m36ehsowkb7w" path="res://Assets/leaf_pack/folhas_verde.png" id="6_v1gob"]
-[ext_resource type="Texture2D" uid="uid://bl7pmv1blj7ih" path="res://Assets/4710b0fe-b8ec-4b06-8868-59dd011037aa.jpg" id="8_50glp"]
+[ext_resource type="Texture2D" uid="uid://bl7pmv1blj7ih" path="res://Assets/Textures/4710b0fe-b8ec-4b06-8868-59dd011037aa.jpg" id="8_50glp"]
 [ext_resource type="Script" uid="uid://fmvswsfde37b" path="res://Scripts/victory_menu.gd" id="8_vy5pj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
