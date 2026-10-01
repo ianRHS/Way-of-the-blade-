@@ -32,21 +32,20 @@ alignment = 1
 [node name="MovementButton" type="Button" parent="Buttons" unique_id=1957298329]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.91721255, 0.90875316, 0.2182619, 1)
-text = "Movement"
+text = "MOVEMENT"
 
 [node name="CombatButton" type="Button" parent="Buttons" unique_id=493215521]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.91764706, 0.9098039, 0.21960784, 1)
-text = "Combat"
+text = "COMBAT"
 
 [node name="RulesButton" type="Button" parent="Buttons" unique_id=1826537529]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.91764706, 0.9098039, 0.21960784, 1)
-text = "Rules
-"
+text = "RULES"
 
 [node name="BackButton" type="Button" parent="Buttons" unique_id=1189184705]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.91764706, 0.9098039, 0.21960784, 1)
-text = "Main Menu
+text = "MAIN MENU
 "
