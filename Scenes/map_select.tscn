@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://hd2j5dov8xo7"]
+
+[ext_resource type="Script" uid="uid://b5ef8db7ls78u" path="res://Scripts/map_select.gd" id="1_h1fkq"]
+[ext_resource type="Texture2D" uid="uid://dwrs7f7dcvc1f" path="res://Assets/Textures/Map selection.jpg" id="2_cjhho"]
+
+[node name="MapSelect" type="Control" unique_id=1154313661]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h1fkq")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1809134014]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cjhho")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=324673269]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Arena1Button" type="Button" parent="VBoxContainer" unique_id=588012186]
+layout_mode = 2
+text = "BAMBOO FOREST"
+
+[node name="Arena2Button" type="Button" parent="VBoxContainer" unique_id=2005952314]
+layout_mode = 2
+text = "DOJO"
+
+[node name="Arena3Button" type="Button" parent="VBoxContainer" unique_id=1641667496]
+layout_mode = 2
+text = "ANCIENT CAVE
+"
+
+[node name="BackButton" type="Button" parent="VBoxContainer" unique_id=924239861]
+layout_mode = 2
+text = "MAIN MENU"

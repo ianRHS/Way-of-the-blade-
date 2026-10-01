@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://by8x8g7oxv7dv"]
+
+[ext_resource type="Script" uid="uid://uynbc4ik31dw" path="res://Scripts/main.gd" id="1_aibo0"]
+[ext_resource type="PackedScene" uid="uid://dpgcpbiix8p14" path="res://Scenes/player.tscn" id="2_y35s5"]
+[ext_resource type="Script" uid="uid://dt6aru0gm20aq" path="res://Scripts/Camera.gd" id="3_o8myr"]
+[ext_resource type="PackedScene" uid="uid://binsmm51c3858" path="res://Scenes/hud.tscn" id="4_1yi1y"]
+[ext_resource type="PackedScene" uid="uid://b5x1nfrmc3t54" path="res://Scenes/pause_menu.tscn" id="5_xvlf7"]
+[ext_resource type="Texture2D" uid="uid://d1hh4iibcxh2u" path="res://Assets/Gemini_Generated_Image_9w9a0j9w9a0j9w9a.jpg" id="6_aibo0"]
+[ext_resource type="Texture2D" uid="uid://m36ehsowkb7w" path="res://Assets/leaf_pack/folhas_verde.png" id="7_4vamo"]
+[ext_resource type="Script" uid="uid://fmvswsfde37b" path="res://Scripts/victory_menu.gd" id="8_cgfpr"]
+[ext_resource type="Texture2D" uid="uid://bl7pmv1blj7ih" path="res://Assets/Textures/4710b0fe-b8ec-4b06-8868-59dd011037aa.jpg" id="9_qeinf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
+size = Vector2(1152, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05dxr"]
+size = Vector2(10, 648)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw32o"]
+atlas = ExtResource("7_4vamo")
+region = Rect2(355.9999, 514.41797, 12.5, 8.979004)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_50glp"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 1, 1)
+angle_min = -15.4999895
+angle_max = 360.00003
+direction = Vector3(0, 1, 0)
+spread = 35.0
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+angular_velocity_min = -45.000015
+angular_velocity_max = 44.999985
+gravity = Vector3(30, 50, 0)
+turbulence_noise_strength = 5.0
+turbulence_noise_scale = 3.0
+turbulence_noise_speed = Vector3(0.5, 0.5, 0.5)
+turbulence_influence_min = 0.2
+turbulence_influence_max = 0.8
+
+[node name="main" type="Node2D" unique_id=2001256775]
+script = ExtResource("1_aibo0")
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1427900738]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=523584079]
+position = Vector2(574, 575)
+shape = SubResource("RectangleShape2D_xnrmw")
+
+[node name="ColorRect" type="ColorRect" parent="Floor" unique_id=565232438]
+offset_left = -2.0
+offset_top = 566.0
+offset_right = 1150.0
+offset_bottom = 584.0
+
+[node name="Player1" parent="." unique_id=217431882 node_paths=PackedStringArray("opponent") instance=ExtResource("2_y35s5")]
+position = Vector2(254, 473)
+opponent = NodePath("../Player2")
+
+[node name="Player2" parent="." unique_id=1135110097 node_paths=PackedStringArray("opponent") instance=ExtResource("2_y35s5")]
+position = Vector2(877, 478)
+player_prefix = "p2"
+opponent = NodePath("../Player1")
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=594525251]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1704345521]
+position = Vector2(-5, 324)
+shape = SubResource("RectangleShape2D_05dxr")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=268739821]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=265690497]
+position = Vector2(1158, 324)
+shape = SubResource("RectangleShape2D_05dxr")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1704914151]
+position = Vector2(576, 323)
+script = ExtResource("3_o8myr")
+
+[node name="HUD" parent="." unique_id=1926756454 instance=ExtResource("4_1yi1y")]
+
+[node name="PauseMenu" parent="HUD" unique_id=195141643 instance=ExtResource("5_xvlf7")]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=515063896]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_aibo0")
+expand_mode = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1102532930]
+position = Vector2(566, -69)
+amount = 40
+texture = SubResource("AtlasTexture_jw32o")
+lifetime = 10.0
+preprocess = 15.0
+process_material = SubResource("ParticleProcessMaterial_50glp")
+
+[node name="VictoryMenu" type="CanvasLayer" parent="." unique_id=747801022]
+process_mode = 3
+visible = false
+script = ExtResource("8_cgfpr")
+
+[node name="Control" type="Control" parent="VictoryMenu" unique_id=329348348]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundTint" type="ColorRect" parent="VictoryMenu/Control" unique_id=1714013972]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.32156864, 0.32156864, 0.32156864, 0.7254902)
+
+[node name="VictoryBanner" type="TextureRect" parent="VictoryMenu/Control" unique_id=1491154887]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("9_qeinf")
+
+[node name="WinnerText" type="Label" parent="VictoryMenu/Control" unique_id=433349208]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 26.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+text = "PLAYER 1 WINS!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="VictoryMenu/Control" unique_id=86152482]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.629
+anchor_right = 0.5
+anchor_bottom = 0.629
+offset_left = -52.0
+offset_top = -14.5920105
+offset_right = 52.0
+offset_bottom = 165.40799
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RematchButton" type="Button" parent="VictoryMenu/Control/ButtonContainer" unique_id=1841836841]
+layout_mode = 2
+text = "REMATCH"
+
+[node name="MainMenuButton" type="Button" parent="VictoryMenu/Control/ButtonContainer" unique_id=1671860603]
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="ExitButton" type="Button" parent="VictoryMenu/Control/ButtonContainer" unique_id=1016207012]
+layout_mode = 2
+text = "EXIT"
+
+[node name="SpawnP1" type="Marker2D" parent="." unique_id=494531317]
+position = Vector2(253, 475)
+
+[node name="SpawnP2" type="Marker2D" parent="." unique_id=18162916]
+position = Vector2(877, 476)

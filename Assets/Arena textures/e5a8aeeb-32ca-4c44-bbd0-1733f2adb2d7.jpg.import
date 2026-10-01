@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crwi0b2v76oj"
-path="res://.godot/imported/0bd30ac8-5eca-4558-acf9-fb012fb92abe.jpg-6a4077ffd5d10248f66554b8867e22a9.ctex"
+uid="uid://cvtx2k382ldwh"
+path="res://.godot/imported/e5a8aeeb-32ca-4c44-bbd0-1733f2adb2d7.jpg-5e195c7cdea702d927d5c4bd71a124cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Arenas/0bd30ac8-5eca-4558-acf9-fb012fb92abe.jpg"
-dest_files=["res://.godot/imported/0bd30ac8-5eca-4558-acf9-fb012fb92abe.jpg-6a4077ffd5d10248f66554b8867e22a9.ctex"]
+source_file="res://Assets/Arena textures/e5a8aeeb-32ca-4c44-bbd0-1733f2adb2d7.jpg"
+dest_files=["res://.godot/imported/e5a8aeeb-32ca-4c44-bbd0-1733f2adb2d7.jpg-5e195c7cdea702d927d5c4bd71a124cc.ctex"]
 
 [params]
 

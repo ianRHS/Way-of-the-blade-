@@ -11,8 +11,8 @@ func _ready() -> void:
 	quit_button.pressed.connect(_on_quit_pressed)
 
 func _on_start_pressed() -> void:
-	# Change "res://scenes/main.tscn" to match your actual game scene's file path if it's different
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	# Change this to point to your new Map Select scene
+	get_tree().change_scene_to_file("res://Scenes/map_select.tscn")
 	
 func _on_tutorial_pressed() -> void:
 	# Adjust this path if your tutorial menu is saved in a different folder

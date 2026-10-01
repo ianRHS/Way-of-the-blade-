@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 [autoload]
 
 Global="*uid://cads5g1o8ara4"
+GameManager="*uid://dxhqxp8mjckeq"
 
 [display]
 
