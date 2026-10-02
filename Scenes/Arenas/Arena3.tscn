@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://m36ehsowkb7w" path="res://Assets/leaf_pack/folhas_verde.png" id="7_ae7au"]
 [ext_resource type="Script" uid="uid://fmvswsfde37b" path="res://Scripts/victory_menu.gd" id="8_ys66b"]
 [ext_resource type="Texture2D" uid="uid://bl7pmv1blj7ih" path="res://Assets/Textures/4710b0fe-b8ec-4b06-8868-59dd011037aa.jpg" id="9_oqfme"]
+[ext_resource type="AudioStream" uid="uid://civwdgukt2rgq" path="res://Assets/Sounds/sonican-action-fight-239712.mp3" id="10_dwhtt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(1152, 18)
@@ -178,3 +179,7 @@ position = Vector2(253, 475)
 
 [node name="SpawnP2" type="Marker2D" parent="." unique_id=18162916]
 position = Vector2(877, 476)
+
+[node name="FightMusic" type="AudioStreamPlayer2D" parent="." unique_id=829681215]
+stream = ExtResource("10_dwhtt")
+autoplay = true

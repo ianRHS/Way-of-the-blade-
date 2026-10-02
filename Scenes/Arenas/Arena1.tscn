@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bu0a053wug6cm" path="res://Assets/Samurai assets/Samurai_Commander/Dead.png" id="9_cws30"]
 [ext_resource type="Texture2D" uid="uid://qix8emme2jli" path="res://Assets/Samurai assets/Samurai_Commander/Jump.png" id="10_juxiu"]
 [ext_resource type="Texture2D" uid="uid://bm63ymoxiqye3" path="res://Assets/Samurai assets/Samurai_Commander/Protect.png" id="11_jva2n"]
+[ext_resource type="AudioStream" uid="uid://civwdgukt2rgq" path="res://Assets/Sounds/sonican-action-fight-239712.mp3" id="19_k5rcg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(1152, 18)
@@ -532,3 +533,7 @@ position = Vector2(253, 475)
 
 [node name="SpawnP2" type="Marker2D" parent="." unique_id=18162916]
 position = Vector2(877, 476)
+
+[node name="FightMusic" type="AudioStreamPlayer2D" parent="." unique_id=943808059]
+stream = ExtResource("19_k5rcg")
+autoplay = true

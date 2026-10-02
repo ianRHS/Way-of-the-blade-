@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://05dkr33ocr4q" path="res://Assets/Samurai assets/Samurai/Dead.png" id="8_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://duencn6ci3w8a" path="res://Assets/Samurai assets/Samurai/Protection.png" id="8_pu2lt"]
 [ext_resource type="Texture2D" uid="uid://doagwbsbvhym8" path="res://Assets/Samurai assets/Samurai/Jump.png" id="10_tx1dd"]
+[ext_resource type="AudioStream" uid="uid://cjilxbl5epvxv" path="res://Assets/Sounds/dragon-studio-violent-sword-slice-393848.mp3" id="11_ukyrk"]
+[ext_resource type="AudioStream" uid="uid://giqxs6w1fo4v" path="res://Assets/Sounds/dragon-studio-sword-clashhit-393837.mp3" id="12_7dp3o"]
+[ext_resource type="AudioStream" uid="uid://chg57vp3s7l63" path="res://Assets/Sounds/dragon-studio-violent-sword-slice-2-393841.mp3" id="13_h4iuc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnrmw"]
 size = Vector2(26, 50)
@@ -440,5 +443,14 @@ animation = &"jump"
 autoplay = "Idle"
 frame_progress = 0.5705452
 offset = Vector2(0, -33)
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1309786581]
+stream = ExtResource("11_ukyrk")
+
+[node name="ParrySound" type="AudioStreamPlayer2D" parent="." unique_id=755188818]
+stream = ExtResource("12_7dp3o")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=1746316470]
+stream = ExtResource("13_h4iuc")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

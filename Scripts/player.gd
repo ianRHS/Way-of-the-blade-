@@ -30,6 +30,10 @@ var current_health: int
 @onready var sword_visual: ColorRect = $Pivot/Hitbox/SwordVisual
 @onready var anim: AnimatedSprite2D = $Pivot/CharacterAnim
 @onready var animated_sprite: AnimatedSprite2D = $Pivot/CharacterAnim
+# Reference your audio nodes at the top of the script
+@onready var hit_sound = $HitSound
+@onready var parry_sound = $ParrySound
+@onready var death_sound = $DeathSound
 
 
 func _ready() -> void:
@@ -267,6 +271,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			
 			if is_guarding:
 				print(player_prefix.to_upper() + " PARRIED THE ATTACK!")
+				parry_sound.play()
 				
 				# Spawn yellow parry sparks
 				Global.spawn_impact_particles(impact_pos, true)
@@ -296,6 +301,7 @@ func take_damage() -> void:
 	if is_dead:
 		return
 		
+	hit_sound.play()
 	current_health -= 1
 	Global.update_health(player_prefix, current_health, max_health)
 	
@@ -307,6 +313,7 @@ func take_damage() -> void:
 		
 func die() -> void:
 		is_dead = true
+		death_sound.play()
 		HitBox_Shape.set_deferred("disabled", true)
 		sword_visual.visible = false
 		$CollisionShape2D.set_deferred("disabled", true)	

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c7ulxtay55khj" path="res://Scripts/main_menu.gd" id="1_853f1"]
 [ext_resource type="Texture2D" uid="uid://brdjrjf33j6lg" path="res://Assets/Free-Summer-Pixel-Art-Backgrounds/Way of the blade main menu.jpg" id="1_tt5f1"]
+[ext_resource type="AudioStream" uid="uid://cfy2atq56vnd3" path="res://Assets/Sounds/alex-morgan-game-level-pixel-quest-loop-578505.mp3" id="3_8saeu"]
 
 [node name="MainMenu" type="Control" unique_id=962999755]
 layout_mode = 3
@@ -65,3 +66,7 @@ theme_override_constants/outline_size = 2
 theme_override_constants/line_spacing = 5
 theme_override_font_sizes/font_size = 50
 text = "EXIT"
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="." unique_id=192696219]
+stream = ExtResource("3_8saeu")
+autoplay = true
